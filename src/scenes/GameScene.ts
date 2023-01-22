@@ -1,13 +1,18 @@
 import { Scene } from 'phaser';
+import { Card } from '../Card';
 
 export class GameScene extends Scene {
   constructor() {
     super('GameScene');
   }
 
+  onCardClick(_: unknown, object: unknown) {
+    console.log('_', _);
+    console.log('object', object);
+  }
+
   create() {
-    const card = this.add.sprite(250, 400, 'card');
-    console.log(card);
-    card.scale = 0.5;
+    const card = new Card(this, 250, 500);
+    this.input.on('gameobjectdown', this.onCardClick);
   }
 }
