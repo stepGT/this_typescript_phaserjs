@@ -15,7 +15,6 @@ export class Card extends GameObjects.Sprite {
     this.id = id;
     this.scene.add.existing(this);
     this.setInteractive();
-    console.log(this);
   }
 
   get isOpen() {

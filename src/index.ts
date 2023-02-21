@@ -5,8 +5,8 @@ import gameConfig from './gameConfig';
 
 const config: Types.Core.GameConfig = {
   type: AUTO,
-  width: gameConfig.screenheightH,
-  height: gameConfig.screenheightH,
+  width: gameConfig.screenWidth,
+  height: gameConfig.screenHeight,
   backgroundColor: gameConfig.backgroundColor,
   scene: [PreloadScene, GameScene],
 };
