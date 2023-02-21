@@ -1,7 +1,7 @@
 import { GameObjects, Scene } from 'phaser';
 
 type CardID = '1' | '2' | '3' | '4' | '5';
-type CardPosition = { x: number; y: number };
+export type CardPosition = { x: number; y: number };
 type CardProps = CardPosition & { id: CardID };
 
 export class Card extends GameObjects.Sprite {
