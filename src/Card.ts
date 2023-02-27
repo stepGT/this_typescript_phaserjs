@@ -30,4 +30,18 @@ export class Card extends GameObjects.Sprite {
     this._isOpen = false;
     this.setTexture('card');
   }
+
+  move(x: number, y: number) {
+    return new Promise((animationResolve) => {
+      this.scene.tweens.add({
+        targets: this,
+        ease: 'Linear',
+        x,
+        y,
+        duration: 200,
+        onComplete: animationResolve,
+      });
+    });
+  }
+
 }

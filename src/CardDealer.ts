@@ -38,7 +38,7 @@ export class CardDealer {
     }
   }
 
-  createCards() {
+  async createCards() {
     const allCardIdsPosition = Utils.Array.Shuffle([
       ...this.possibleCardIds,
       ...this.possibleCardIds,
@@ -46,10 +46,13 @@ export class CardDealer {
 
     const cardPositions = this.getCardsPosions();
 
-    allCardIdsPosition.forEach((cardID, idx) => {
+    let idx = 0;
+    for (const cardID of allCardIdsPosition) {
       const { x, y } = cardPositions[idx];
-      new Card(this._scene, { x, y, id: cardID });
-    });
+      const card = new Card(this._scene, { x: -200, y: -200, id: cardID });
+      await card.move(x, y);
+      idx++;
+    }
   }
 
   private getCardsPosions() {
