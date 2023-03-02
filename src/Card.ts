@@ -21,14 +21,14 @@ export class Card extends GameObjects.Sprite {
     return this._isOpen;
   }
 
-  open() {
+  async open() {
     this._isOpen = true;
-    this.setTexture('card' + this.id);
+    await this.flip();
   }
 
-  close() {
+  async close() {
     this._isOpen = false;
-    this.setTexture('card');
+    await this.flip();
   }
 
   move(x: number, y: number) {
@@ -44,4 +44,29 @@ export class Card extends GameObjects.Sprite {
     });
   }
 
+  flip() {
+    return new Promise((animationReslover) => {
+      const show = () => {
+        const texture = this._isOpen ? 'card' + this.id : 'card';
+
+        this.setTexture(texture);
+
+        this.scene.tweens.add({
+          targets: this,
+          scaleX: 1,
+          ease: 'Linear',
+          duration: 150,
+          onComplete: animationReslover,
+        });
+      };
+
+      this.scene.tweens.add({
+        targets: this,
+        scaleX: 0,
+        ease: 'Linear',
+        duration: 150,
+        onComplete: show,
+      });
+    });
+  }
 }

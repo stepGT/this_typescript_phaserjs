@@ -14,10 +14,10 @@ export class CardDealer {
     this._scene = scene;
   }
 
-  openCard(card: Card) {
+  async openCard(card: Card) {
     if (card.isOpen) return;
 
-    card.open();
+    await card.open();
 
     if (!this.prevOpenCard) {
       this.prevOpenCard = card;
@@ -27,8 +27,7 @@ export class CardDealer {
     if (this.prevOpenCard.id === card.id) {
       this.guessedPairs += 1;
     } else {
-      this.prevOpenCard.close();
-      card.close();
+      await Promise.all([this.prevOpenCard.close(), card.close()]);
     }
 
     this.prevOpenCard = null;
